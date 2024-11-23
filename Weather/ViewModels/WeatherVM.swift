@@ -16,7 +16,7 @@ class WeatherViewModel: WeatherProtocol {
         let networking = Networking()
         if let data = try await networking.getRequest(url: "\(Constants.endpoint)\(Constants.currenWeatherAPI)", queryItems: [
             URLQueryItem(name: "q", value: city),
-            URLQueryItem(name: "key", value: Constants.apiKey)
+            URLQueryItem(name: "key", value: Keys.apiKey)
         ]) {
             let result: WeatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
             return result
