@@ -13,6 +13,7 @@ struct HomeScreen: View {
     @State var loading = true
     @State var isDefaultCityEmpty = true
     @State var isSearching = false
+    @State var isSearchLoading = false
     @FocusState var isSearchInFocus: Bool
     let weatherVM = WeatherViewModel()
     @State var searchedWeather: WeatherResponse?
@@ -24,8 +25,10 @@ struct HomeScreen: View {
                     .font(.custom(Poppins.regular, size: 20))
                     .onSubmit {
                         isSearching = true
+                        isSearchLoading = true
                         Task {
                             searchedWeather = try await weatherVM.getWeather(for: searchedCity)
+                            isSearchLoading = false
                         }
                     }
                 Image("search_24px")
@@ -35,19 +38,25 @@ struct HomeScreen: View {
             .clipShape(RoundedRectangle(cornerRadius: 16))
             Spacer()
             if isSearching {
-                if searchedWeather?.location != nil {
-                    SearchScreen(searchedWeather: searchedWeather) {
-                        isSearching = false
-                        weather = searchedWeather
-                        weatherVM.setUDCity(searchedCity)
-                        searchedCity = ""
-                    }
+                if isSearchLoading {
+                    ProgressView()
                 } else {
-                    VStack {
-                        Spacer()
-                        Text("Could not find the what you're looking for.")
-                            .font(.custom(Poppins.semiBold, size: 18))
-                        Spacer()
+                    if searchedWeather?.location != nil {
+                        SearchScreen(searchedWeather: searchedWeather) {
+                            isSearching = false
+                            weather = searchedWeather
+                            weatherVM.setUDCity(searchedCity)
+                            searchedCity = ""
+                        }
+                    } else {
+                        VStack {
+                            Spacer()
+
+                            Text("Could not find the what you're looking for.")
+                                .font(.custom(Poppins.semiBold, size: 18))
+
+                            Spacer()
+                        }
                     }
                 }
             } else {
