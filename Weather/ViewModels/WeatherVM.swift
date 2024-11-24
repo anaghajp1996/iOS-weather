@@ -9,9 +9,20 @@ import Foundation
 
 protocol WeatherProtocol {
     func getWeather(for city: String) async throws -> WeatherResponse?
+    func setUDCity(_ city: String)
+    func getUDCity() -> String
 }
 
 class WeatherViewModel: WeatherProtocol {
+
+    func setUDCity(_ city: String) {
+        UserDefaults.standard.set(city, forKey: Constants.cityNameKey)
+    }
+    
+    func getUDCity() -> String {
+        return UserDefaults.standard.string(forKey: Constants.cityNameKey) ?? ""
+    }
+    
     func getWeather(for city: String) async throws -> WeatherResponse? {
         let networking = Networking()
         if let data = try await networking.getRequest(url: "\(Constants.endpoint)\(Constants.currenWeatherAPI)", queryItems: [

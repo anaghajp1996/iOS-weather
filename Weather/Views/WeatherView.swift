@@ -22,14 +22,14 @@ struct WeatherView: View {
             if weather.location?.cityName != nil {
                 HStack {
                     Text((weather.location?.cityName)!)
-                        .font(.custom("Poppins-SemiBold", size: 30))
+                        .font(.custom(Poppins.semiBold, size: 30))
                     Image(systemName: "location.fill")
                         .foregroundStyle(.black)
                 }
             }
             if weather.weather?.temperature != nil {
                 Text("\(weather.weather!.temperature!, specifier: "%.2f")°")
-                    .font(.custom("Poppins-Medium", size: 70))
+                    .font(.custom(Poppins.medium, size: 70))
             }
             HStack {
                 if let humidity = weather.weather?.humidity {
