@@ -10,22 +10,9 @@
 		D2711DF92CF2732F005DCE3F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D2711E4B2CF2914C005DCE3F /* Exceptions for "Weather" folder in "Weather" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = D2711DF82CF2732F005DCE3F /* Weather */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D2711DFB2CF2732F005DCE3F /* Weather */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				D2711E4B2CF2914C005DCE3F /* Exceptions for "Weather" folder in "Weather" target */,
-			);
 			path = Weather;
 			sourceTree = "<group>";
 		};
